@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width= device-width,initial-scale= 1.0,user-scalable= no"/>
+	<title>添加课程组</title>
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/md5.min.js"></script>
+	<script src="js/question.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/question.css">
+	<style type="text/css">
+		.g-foot{
+			position: fixed;
+			bottom: 0;
+		}
+		html,body{
+			height: 100%;
+		}
+		body{
+			min-width: 500px;
+		}
+		body,button,input,select,legend,fieldset,div,h1,h2,h3,h4,h5,h6{
+			padding: 0;
+			margin: 0;
+			border: 0;
+			box-sizing: border-box;
+			font: normal 18px/1.428 "Microsoft YaHei","Arial","Hiragino Sans GB", "Helvetica", "sans-serif";
+		}
+		button,input[type=submit],input[type=reset],
+		input[type=checkbox],input[type=radio]{
+			cursor: pointer;
+		}
+		a{
+			text-decoration: none;
+		}
+	</style>
+	<script type="text/javascript">
+		var jsonText,jsonObj;
+		$(function () {
+			var ist=$("#ist");
+
+			//获取学院信息
+			jsonText=$.getInfoJson("school");
+			jsonObj=JSON.parse(jsonText);
+
+			//把学院信息append到学院select里
+			ist.appendSchool(jsonObj);
+
+			$("form").submit(function() {
+				var school=ist.find('option:selected').val().split('-')[1];
+				if(school=='0'){
+					alert("请选择学院!");
+					return false;
+				}
+
+				var team=$("#zname").val(),
+					name=$("#lname").val(),
+					num=$("#lnum").val(),
+					pwd=hex_md5($("#lpwd").val());
+				alert(school+"\r\n"+team+"\r\n"+name+"\r\n"+num+"\r\n"+pwd);
+				return false;
+			});
+		});
+	</script>
+</head>
+<body>
+	<h1 class="g-head">杭电试题系统</h1>
+	<div class="g-mid">
+		<h2>添加课程组</h2>
+		<form class="m-addteam">
+			<div class="c-ipt">
+				<label for="zname">课程组名:</label>
+				<input type="text" name="zname" id="zname" required>
+			</div>
+			<div class="c-school">
+			<!-- <div class="m-input m-slt"> -->
+				<label for="ist">所属学院:</label>
+				<select name="clg" id="ist">
+					<option value="school-0">--</option>
+				</select>
+			</div>
+			<div class="c-leader">
+				<span class="f-left">组长信息:</span>
+				<p>
+					<label for="lname">姓名:</label>
+					<input type="text" name="lname" id="lname" maxlength="5" required>
+				</p>
+				<p>
+					<label for="lnum">工号:</label>
+					<input type="tel" name="lnum" id="lnum" maxlength="10" required>
+				</p>
+				<p>
+					<label for="lpwd">密码:</label>
+					<input type="password" name="lpwd" id="lpwd" maxlength="16" required>
+				</p>
+			</div>
+			<div class="c-btn">
+				<input type="reset" value="重置">
+				<input type="submit" value="提交">
+			</div>
+		</form>
+	</div>
+	<div class="g-foot"></div>
+</body>
+</html>
