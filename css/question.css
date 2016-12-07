@@ -1,0 +1,237 @@
+/* reset */
+body,button,input,select,legend,fieldset,div,h1,h2,h3,h4,h5,h6{
+	padding: 0;
+	margin: 0;
+	border: 0;
+	font: normal 18px/1.428 "Microsoft YaHei","Arial","Hiragino Sans GB", "Helvetica", "sans-serif";
+}
+button,input[type=submit],input[type=reset],
+input[type=checkbox],input[type=radio]{
+	cursor: pointer;
+}
+a{
+	text-decoration: none;
+}
+
+/* login/regist css */
+
+.m-form{
+	display: block;
+	width: 380px;
+	margin: 30px auto 0;
+	text-align: center;
+	vertical-align: middle;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.8)
+}
+.m-form legend{
+	width: 380px;
+	line-height: 42px;
+	font-size: 22px;
+	padding-left: 20px;
+	box-sizing: border-box;
+	text-align: left;
+	background-color: #333;
+	color: #fff;
+}
+.m-form fieldset{
+	border: 1px solid #ccc;
+}
+.m-form .m-msg{
+	visibility: hidden; /*正常情况下隐藏*/
+	font-size: 17px;
+	padding: 15px;
+	color: red;
+}
+.m-form .m-input{
+	padding: 0 30px;
+	margin-bottom: 20px;
+}
+.m-form .m-input label{
+	display: inline-block;
+}
+.m-form .m-input input{
+	height: 28px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	text-align: left;
+}
+.m-form .m-input .tip{
+	font-size: 13px;
+	color: #aaa;
+}
+.m-form .m-check{
+	font-size: 15px;
+	text-align: left;
+	margin-left: 70px;
+}
+.m-form a{
+	font-size: 14px;
+	color: #a73333;
+}
+.m-form a:hover{
+	color: #9b1919;
+}
+.m-form .m-btn{
+	display: inline-block;
+	width: 200px;
+	height: 32px;
+	margin: 10px 0 10px;
+	border-radius: 3px;
+	color: #fff;
+	background-color: #2d7dc7;
+}
+.m-form .m-a-btn{
+	height: 28px;
+	padding: 0px 10px;
+	margin: 10px 0px 30px;
+	border-radius: 3px;
+	font-size: 16px;
+	color: #2d7dc7;
+	background-color: #ccc;
+	display: inline-block;
+	line-height: 28px;
+}
+.m-form .m-a-btn:hover{
+	text-decoration: none;
+}
+.m-form .m-a-btn+.m-a-btn{
+	margin-left: 15px;
+}
+.m-form .disabled{ /*提交时把登录按钮禁用掉的样式*/
+	cursor: default;
+	background-color: #ddd;
+	color: #fff;
+	outline: none;
+}
+.g-tip{
+	width: 380px;
+	margin: 0 auto;
+	text-align: left;
+	font: normal 15px/1.5 "Microsoft YaHei","Arial","Hiragino Sans GB", "Helvetica", "sans-serif";
+}
+.g-tip .m-para{
+	padding: 10px;
+	background-color: #ccc;
+	box-shadow: 5px 5px 5px #333;
+}
+.g-tip .m-para span{
+	color: #f00;
+}
+.g-tip .m-para a{
+	text-decoration: none;
+	color: #2d7dc7;
+}
+.g-tip .m-para a:hover,.m-form a:hover{
+	text-decoration: underline;
+}
+.i-warning{
+	font-size: 9px;
+	color: red;
+	vertical-align: middle;
+}
+
+
+/* addcourse/addteam css */
+
+.g-head{
+	padding: 5px 0 5px 30px;
+	border: 2px solid;
+	border-bottom: 30px solid;
+	font-size: 32px;
+	color: #3d62e4;
+}
+.g-mid h2{
+	margin: 20px 0 10px 35px;
+	font-size: 28px;
+	color: #666;
+}
+.g-mid .m-addcrs,.g-mid .m-addteam{
+	margin: 0 auto;
+	width: 900px;
+}
+.g-mid .m-addteam{
+	width: 360px;
+}
+.g-mid .m-addcrs>div,
+.g-mid .m-addteam>div{
+	margin-bottom: 30px;
+}
+.g-mid .m-addcrs input,
+.g-mid .m-addteam input,
+.g-mid .c-team select,
+.g-mid .c-school select{
+	border: 2px solid #ccc;
+	border-radius: 4px;
+}
+.g-mid .c-team select,
+.g-mid .c-school select{
+	width: 120px;
+	margin-left: 20px;
+	font-size: 14px;
+}
+.g-mid .c-name>input,
+.g-mid .c-chapter>input,
+.g-mid .c-leader input{
+	margin-left: 20px;
+	line-height: 1.5;
+	font-size: 16px;
+}
+.g-mid .c-seltype>p{
+	margin-left: 80px;
+}
+.g-mid .c-seltype label,
+.g-mid .c-level label,
+.g-mid .c-chapter label{
+	font-size: 16px;
+	padding: 2px 3px;
+	margin: 0 3px;
+}
+.g-mid .c-xy{
+	margin: 0 10px;
+	padding: 3px 5px;
+	border-radius: 5px;
+	font-size: 16px;
+	background-color: #63b4fe;
+	color: #fff;
+}
+.g-mid .c-seltype label:hover,
+.g-mid .c-level label:hover,
+.g-mid .c-chapter label:hover{
+	cursor: pointer;
+	border-radius: 4px;
+	background-color: #eee;
+}
+.g-mid .c-leader p,
+.g-mid .c-chapter p{
+	margin-left: 90px;
+}
+.g-mid .c-leader p>label{
+	font-size: 16px;
+}
+.g-mid .m-tip{
+	font-size: 14px;
+	margin-left: 20px;
+	color: #888;
+}
+.g-mid .m-addcrs .c-btn,
+.g-mid .m-addteam .c-btn{
+	margin: 50px 0;
+	text-align: center;
+}
+.g-mid .c-btn input{
+	width: 100px;
+	border: 0;
+	color: #eee;
+	background-color: #2d7dc7;
+}
+.g-mid .c-btn input+input{
+	margin-left: 60px;
+}
+.g-foot{
+	height: 80px;
+	width: 100%;
+	background-color: #3d62e4;
+}
+.f-left{
+	float: left;
+}
