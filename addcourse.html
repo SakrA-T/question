@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width= device-width,initial-scale= 1.0,user-scalable= no"/>
+	<title>添加课程</title>
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/question.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/question.css">
+	<style type="text/css">
+		body{
+			min-width: 1000px;
+		}
+	</style>
+	<script type="text/javascript">
+		var jsonText,jsonObj;
+		$(function () {
+			var ist=$("#ist"),
+				grp=$("#grp"),
+				ques_type=$("#ques-type");
+
+			//禁用课程组select
+			$("#grp").attr('disabled', 'disabled');
+
+			//获取学院和课程组信息,json格式
+			jsonText=$.getInfoJson("team");
+			jsonObj=JSON.parse(jsonText);
+
+			//append学院到学院select里
+			ist.appendSchool(jsonObj);
+
+			//append试题类型到试题类型div里
+			ques_type.append($.getType("html"));
+
+			//选中学院后获取课程组
+			ist.change(function() {
+	            grp.html("");
+	            grp.append("<option value=\"0\">--</option>");
+	            if(ist.find('option:selected').val()!='0'){
+	                grp.removeAttr('disabled');
+	                grp.appendTeam(ist.find('option:selected').val(),jsonObj);
+	            }
+	            else
+	                grp.attr('disabled', 'disabled');
+        	});
+		});
+	</script>
+</head>
+<body>
+	<h1 class="g-head">杭电试题系统</h1>
+	<div class="g-mid">
+		<h2>添加课程</h2>
+		<form class="m-addcrs">
+			<div class="c-name">
+				<label for="cname">课程名:</label>
+				<input type="text" name="cname" id="cname" required>
+			</div>
+			<div class="c-group">
+				<label for="grp">所属课程组:</label>
+				<select name="ist" id="ist">
+					<option value="0">--</option>
+				</select>
+				<select name="grp" id="grp">
+					<option value="0">--</option>
+				</select>
+			</div>
+			<div class="c-seltype" id="ques-type">
+				<span class="f-left">选择题型:</span>
+				<!-- <p>
+					<span class="c-xy">综合</span>
+					<input type="checkbox" name="ctype" id="t-1-1" value=""><label for="t-1-1">单选题</label>
+				</p>
+				<p>
+					<span class="c-xy">外国语学院</span>
+					<input type="checkbox" name="ctype" id="t-2-1" value=""><label for="t-2-1">完形填空</label>
+				</p>
+				<p>
+					<span class="c-xy">计算机学院</span>
+					<input type="checkbox" name="ctype" id="t-3-1" value=""><label for="t-3-1">名词解释</label>
+				</p> -->
+			</div>
+			<div class="c-level">
+				<span>难度分级: &nbsp;</span>
+				<input type="radio" name="clv" id="v1">
+				<label for="v1">1级</label>
+				<input type="radio" name="clv" id="v2">
+				<label for="v2">1-2级</label>
+				<input type="radio" name="clv" id="v3">
+				<label for="v3">1-3级</label>
+				<input type="radio" name="clv" id="v4">
+				<label for="v4">1-4级</label>
+				<input type="radio" name="clv" id="v5">
+				<label for="v5">1-5级</label>
+				<span class="m-tip">*如：选择1-4级 即为该课程题目难度为1到4级之间</span>
+			</div>
+			<div class="c-chapter">
+				<span class="f-left">包含章节:</span>
+				<p>
+				<input type="checkbox" name="cpt" id="cpt-01"><label for="cpt-01">第01章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-02"><label for="cpt-02">第02章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-03"><label for="cpt-03">第03章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-04"><label for="cpt-04">第04章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-05"><label for="cpt-05">第05章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-06"><label for="cpt-06">第06章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-07"><label for="cpt-07">第07章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-08"><label for="cpt-08">第08章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-09"><label for="cpt-09">第09章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-10"><label for="cpt-10">第10章</label></input>
+				</p>
+				<p>
+				<input type="checkbox" name="cpt" id="cpt-11"><label for="cpt-11">第11章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-12"><label for="cpt-12">第12章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-13"><label for="cpt-13">第13章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-14"><label for="cpt-14">第14章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-15"><label for="cpt-15">第15章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-16"><label for="cpt-16">第16章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-17"><label for="cpt-17">第17章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-18"><label for="cpt-18">第18章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-19"><label for="cpt-19">第19章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-20"><label for="cpt-20">第20章</label></input>
+				</p>
+				<p>
+				<input type="checkbox" name="cpt" id="cpt-21"><label for="cpt-21">第21章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-22"><label for="cpt-22">第22章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-23"><label for="cpt-23">第23章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-24"><label for="cpt-24">第24章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-25"><label for="cpt-25">第25章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-26"><label for="cpt-26">第26章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-27"><label for="cpt-27">第27章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-28"><label for="cpt-28">第28章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-29"><label for="cpt-29">第29章</label></input>
+				<input type="checkbox" name="cpt" id="cpt-30"><label for="cpt-30">第30章</label></input>
+				</p>
+				<p class="m-tip">*如：选择1、3、4、5、9 即为该课程考题包含第1、3、4、5、9章节</p>
+			</div>
+
+			<div class="c-btn">
+				<input type="reset" value="重置">
+				<input type="submit" value="提交">
+			</div>
+		</form>
+	</div>
+	<div class="g-foot"> </div>
+</body>
+</html>

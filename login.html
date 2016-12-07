@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>登录</title>
+	<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/md5.min.js"></script>
+	<link rel="stylesheet" href="css/question.css">
+	<style type="text/css">
+		body,button,input,legend,fieldset,div{
+			padding: 0;
+			margin: 0;
+			border: 0;
+			font: normal 18px/1.428 "Microsoft YaHei";
+		}
+		a{
+			text-decoration: none;
+		}
+		#help{
+			text-align: center;
+		}
+		#setck{
+			vertical-align: middle;
+			cursor: pointer;
+		}
+		#remember-me{
+			font-size: 13px;
+		}
+	</style>
+	<script type="text/javascript">
+		$(function () {
+			var login=$("#login"),
+				massage=$("#massage"),
+				input_tel=$("#tel");
+			//提交事件
+			$("form").submit(function () {
+				var tel=$("#tel").val(),
+				    pwd=hex_md5($("#pwd").val()),
+				    setck=$("#setck");
+				login.addClass('disabled');
+				login.attr('disabled', 'disabled');
+				$.post('login.php', {
+						//提交工号密码,md5加密密码
+						tel: tel,
+						pwd: pwd
+					}, 
+					function(data, textStatus, xhr) {
+						switch (JSON.parse(data).code) {
+							case "0":
+								//用户名或密码错误
+								massage.css('visibility', 'visible');
+								login.removeClass('disabled');
+								login.removeAttr('disabled');
+								massage.text(JSON.parse(data).msg);
+								break;
+							case "1":
+								//登录成功
+								massage.text("欢迎您，"+JSON.parse(data).name+"老师！");
+								massage.css('visibility', 'visible');
+
+								//设置七天免登录
+								if(setck.prop('checked'))
+								{
+									$.post('set_cookie.php', {name: tel,value: pwd}, function(data, textStatus, xhr) {
+										if(data=="0")
+											alert("设置免登录时出现错误！请联系系统管理员修复！");
+									});
+								}
+								setTimeout(function () {
+									location.href="homepage.html?id="+JSON.parse(data).id;
+								}, 1000);
+								break;
+							case "-1":
+								//连接数据库出错
+								login.removeClass('disabled');
+								login.removeAttr('disabled');
+								alert(JSON.parse(data).msg);
+								break;
+							default:
+								login.removeClass('disabled');
+								login.removeAttr('disabled');
+								alert("出现未知错误！请联系系统管理员修复！");
+								break;
+						}
+				});
+			});
+			$("#regist").click(function() {
+				location.href="regist.html";
+			});
+		});
+	</script>
+</head>
+<body>
+	<form action="javascript:void(0)" id="loginForm" class="m-form" autocomplete="off">
+		<legend>试题系统登录</legend>
+		<fieldset>
+			<div class="m-msg" id="massage">在这里提示登录成功或其他信息</div>
+			<div class="m-input">
+				<label for="tel">工号：</label>
+				<input type="tel" name="tel" id="tel" maxlength="10" required><br>
+			</div>
+			<div class="m-input">
+				<label for="pwd">密码：</label>
+				<input type="password" name="pwd" id="pwd" maxlength="16" required>
+			</div>
+			<div class="m-check">
+				<input type="checkbox" name="setck" id="setck">
+				<label for="setck" id="remember-me">七天免登录</label>
+			</div>
+			<button class="m-btn" id="login">登录</button><br>
+			<a href="">忘记密码了？</a>
+			<div>
+				<a href="regist.html" class="m-a-btn" id="regist">教师注册</a>
+				<a href="javascript:void(0)" class="m-a-btn" id="addcourse">添加课程组</a>
+				<a href="javascript:void(0)" class="m-a-btn" id="addteam">添加课程</a>
+			</div>
+		</fieldset>
+	</form>
+	<div class="g-tip">
+		<p class="m-para" id="help">更多说明请查看<a href="help.html">《使用帮助》</a></p>
+	</div>
+</body>
+</html>
